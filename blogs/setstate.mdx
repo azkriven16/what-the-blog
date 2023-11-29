@@ -1,0 +1,49 @@
+---
+title: The Power of setState(prev => !prev) in React
+date: 5th December 2023
+description: benefits of using setState(prev => !prev) over setState(true) or setState(false)
+---
+
+# The Power of `setState(prev => !prev)` in React
+
+When working with React state management, it's common to toggle a boolean value based on its current state. While it might be tempting to use straightforward `setState(true)` or `setState(false)`, there's a more robust and reliable alternative: `setState(prev => !prev)`. In this blog post, we'll delve into the advantages of using this approach and how it can lead to more predictable and efficient React components.
+
+## The Problem with setState(true) and setState(false)
+
+Consider a simple toggle button component:
+
+```jsx
+import React, { useState } from "react";
+
+const ToggleButton = () => {
+  const [isToggled, setIsToggled] = useState(false);
+
+  const handleClick = () => {
+    // Using setState(true) or setState(false)
+    setIsToggled(!isToggled);
+  };
+
+  return <button onClick={handleClick}>{isToggled ? "ON" : "OFF"}</button>;
+};
+```
+
+## The Solution: setState(prev => !prev)
+
+To ensure the correct state transition, it's advisable to use the functional form of setState:
+
+```jsx
+import React, { useState } from "react";
+
+const ToggleButton = () => {
+  const [isToggled, setIsToggled] = useState(false);
+
+  const handleClick = () => {
+    // Using setState(prev => !prev)
+    setIsToggled((prev) => !prev);
+  };
+
+  return <button onClick={handleClick}>{isToggled ? "ON" : "OFF"}</button>;
+};
+```
+
+Happy coding!

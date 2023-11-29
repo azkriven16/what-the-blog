@@ -1,0 +1,58 @@
+---
+title: The `useClickOutside` React Hook
+date: 29th November 2023
+description: Useful react hook for improved user interactions.
+---
+
+# The Power of `useClickOutside` React Hook
+
+In the dynamic landscape of React development, creating user-friendly components is crucial. One common challenge developers face is managing events outside specific elements, such as clicks outside modals or dropdowns. Enter the `useClickOutside` React hook – a powerful tool for handling these scenarios with elegance and efficiency.
+
+## Understanding the Need
+
+Consider a scenario where you have a modal that should close when users click outside of it. The traditional approach involves event listeners and state management, often leading to complex and error-prone code.
+
+## Introducing `useClickOutside`
+
+The `useClickOutside` hook simplifies this process, encapsulating the logic for detecting clicks outside a specified element. Here's a basic implementation:
+
+```jsx
+import { useEffect } from "react";
+
+const useClickOutside = (ref, callback) => {
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        callback();
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [ref, callback]);
+};
+
+export default useClickOutside;
+```
+
+## Implementing useClickOutside in a Component
+
+Now, let's see how you can use useClickOutside in a practical scenario, such as closing a modal:
+
+```jsx
+import React, { useRef } from "react";
+import useClickOutside from "./useClickOutside";
+
+const Modal = ({ onClose }) => {
+  const modalRef = useRef();
+
+  useClickOutside(modalRef, onClose);
+
+  return <div ref={modalRef}>{/* Modal content */}</div>;
+};
+```
+
+Happy coding!
