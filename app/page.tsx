@@ -28,8 +28,8 @@ export default function Home() {
   return (
     <section>
       <p className="text-muted-foreground mb-10">
-        This are some of useful stuff I remember in my web dev journey
-        interpreted by AI.
+        This are some of useful stuff I took notes of in my web dev journey.
+      
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {blogs.map((blog) => (
